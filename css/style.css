@@ -17,6 +17,11 @@
   --gold-ink:  #1b1607; /* text on gold */
   --ok:        #7f9a73;
 
+  /* liquid-gold sheen — echoes the oil swirl in the real signage */
+  --gold-liquid: linear-gradient(125deg, #6b4717 0%, #caa244 20%, #f4d889 42%, #fff6da 50%, #f0cf72 58%, #caa244 75%, #7a541d 100%);
+  /* brushed steel — echoes the metal letter in the real signage */
+  --metal-brushed: linear-gradient(100deg, #5d6063 0%, #a9adb1 26%, #eef0f1 46%, #c7cbce 58%, #84878a 78%, #5d6063 100%);
+
   /* type */
   --f-display: "Big Shoulders Display", "Arial Narrow", sans-serif;
   --f-body: "Manrope", -apple-system, "Segoe UI", sans-serif;
@@ -148,11 +153,14 @@ h3{font-size:clamp(20px, 2.4vw, 26px);}
   transition:transform .25s var(--ease), box-shadow .25s var(--ease), background .25s var(--ease), border-color .25s var(--ease);
 }
 .btn-primary{
-  background:linear-gradient(180deg, var(--gold-bright), var(--gold));
+  background:var(--gold-liquid);
+  background-size:200% 200%;
+  background-position:0% 50%;
   color:var(--gold-ink);
   box-shadow:0 1px 0 rgba(255,255,255,.4) inset, 0 14px 30px -12px rgba(200,160,70,.55);
+  transition:transform .25s var(--ease), box-shadow .25s var(--ease), background-position .4s var(--ease), border-color .25s var(--ease);
 }
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 1px 0 rgba(255,255,255,.5) inset, 0 18px 34px -10px rgba(200,160,70,.7);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 1px 0 rgba(255,255,255,.5) inset, 0 18px 34px -10px rgba(200,160,70,.7);background-position:100% 50%;}
 .btn-ghost{
   border:1px solid var(--line);
   color:var(--ink);
@@ -200,8 +208,13 @@ h3{font-size:clamp(20px, 2.4vw, 26px);}
   gap:24px;
 }
 
-.brand{display:flex;align-items:center;gap:10px;flex-shrink:0;}
-.brand-mark{width:30px;height:30px;flex-shrink:0;}
+.brand{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.brand-mark-img{
+  width:44px;height:44px;border-radius:50%;flex-shrink:0;
+  object-fit:cover;
+  box-shadow:0 0 0 1px rgba(244,239,227,.18), 0 0 16px 3px rgba(200,160,70,.38);
+  background:#0d0c0a;
+}
 .brand-text{display:flex;flex-direction:column;line-height:1;}
 .brand-name{
   font-family:var(--f-display);
@@ -213,10 +226,10 @@ h3{font-size:clamp(20px, 2.4vw, 26px);}
 .brand-name b{color:var(--gold);font-weight:700;}
 .brand-tag{
   font-family:var(--f-mono);
-  font-size:9.5px;
-  letter-spacing:.28em;
-  color:var(--ink-faint);
+  font-size:11px;
+  letter-spacing:.14em;
   margin-top:3px;
+  color:var(--ink-dim);
 }
 
 .main-nav{display:flex;align-items:center;gap:26px;}
@@ -305,6 +318,7 @@ h3{font-size:clamp(20px, 2.4vw, 26px);}
   font-style:normal;
   color:var(--gold);
 }
+.hero h1 .h1-brand{font-size:1.18em;}
 .hero .lede{margin-top:22px;font-size:clamp(16px,1.5vw,18.5px);}
 .hero-ctas{display:flex;gap:16px;margin-top:34px;flex-wrap:wrap;}
 
@@ -320,17 +334,17 @@ h3{font-size:clamp(20px, 2.4vw, 26px);}
   border-bottom:1px solid var(--line);
   padding-bottom:14px;margin-bottom:6px;
 }
-.statement-head .eyebrow{font-size:10.5px;}
-.statement-head time{font-family:var(--f-mono);font-size:11px;color:var(--ink-faint);}
+.statement-head .eyebrow{font-size:12px;}
+.statement-head time{font-family:var(--f-mono);font-size:12.5px;color:var(--ink-faint);}
 .statement-row{
   display:flex;align-items:baseline;gap:8px;
   padding:13px 0;
   border-bottom:1px dashed var(--line);
 }
 .statement-row:last-child{border-bottom:0;}
-.statement-row .label{font-size:13.5px;color:var(--ink-dim);white-space:nowrap;}
+.statement-row .label{font-size:15px;color:var(--ink-dim);white-space:nowrap;}
 .statement-row .fill{flex:1;border-bottom:1px dotted var(--line);transform:translateY(-4px);}
-.statement-row .value{font-family:var(--f-mono);font-size:14px;color:var(--gold-bright);white-space:nowrap;}
+.statement-row .value{font-family:var(--f-mono);font-size:16.5px;font-weight:500;color:var(--gold-bright);white-space:nowrap;}
 
 /* =================================================================
    HERITAGE BAND
@@ -351,6 +365,20 @@ h3{font-size:clamp(20px, 2.4vw, 26px);}
   letter-spacing:-.02em;
 }
 .heritage-figure span{display:block;font-family:var(--f-body);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-top:10px;}
+.heritage-photo{
+  margin-top:24px;
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid var(--line);
+  box-shadow:0 20px 40px -24px rgba(0,0,0,.6);
+}
+.heritage-photo img{width:100%;object-fit:cover;display:block;}
+.heritage-photo span{
+  display:block;padding:12px 14px;
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;
+  color:var(--ink-faint);text-transform:none;
+  background:var(--bg-1);border-top:1px solid var(--line);
+}
 .heritage-text p{margin-top:18px;color:var(--ink-dim);max-width:54ch;}
 .heritage-stats{display:flex;gap:36px;margin-top:30px;flex-wrap:wrap;}
 .heritage-stats div b{display:block;font-family:var(--f-mono);font-size:22px;color:var(--gold-bright);}
@@ -409,23 +437,24 @@ h3{font-size:clamp(20px, 2.4vw, 26px);}
 .trust-item:hover{background:var(--bg-2);}
 .trust-item .svc-icon{width:30px;height:30px;margin-bottom:16px;}
 .trust-item h3{font-size:16px;text-transform:none;letter-spacing:0;font-family:var(--f-body);font-weight:700;}
-.trust-item p{margin-top:10px;font-size:13.5px;color:var(--ink-dim);}
+.trust-item p{margin-top:10px;font-size:15.5px;color:var(--ink-dim);}
 
 /* =================================================================
    PROCESS
 ================================================================= */
-.process-section{padding:clamp(56px,8vw,96px) 0;border-bottom:1px solid var(--line-soft);}
-.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
-.process-step{position:relative;padding-top:30px;}
+.process-section{padding:clamp(76px,11vw,130px) 0;border-bottom:1px solid var(--line-soft);}
+.process-section h2{font-size:clamp(36px,4.8vw,58px);}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;}
+.process-step{position:relative;padding-top:36px;}
 .process-step::before{
   content:"";position:absolute;top:0;left:0;width:100%;height:1px;background:var(--line);
 }
 .process-step::after{
   content:"";position:absolute;top:-1px;left:0;width:34px;height:2px;background:var(--gold);
 }
-.process-num{font-family:var(--f-mono);color:var(--gold);font-size:13px;letter-spacing:.05em;}
-.process-step h3{font-size:18px;margin-top:10px;text-transform:none;letter-spacing:0;font-family:var(--f-body);font-weight:700;}
-.process-step p{margin-top:8px;font-size:13.5px;color:var(--ink-dim);}
+.process-num{font-family:var(--f-mono);color:var(--gold);font-size:15.5px;letter-spacing:.05em;}
+.process-step h3{font-size:23px;margin-top:14px;text-transform:none;letter-spacing:0;font-family:var(--f-body);font-weight:700;}
+.process-step p{margin-top:10px;font-size:16px;color:var(--ink-dim);}
 
 /* =================================================================
    TARIFFS — bank-card signature
@@ -615,9 +644,9 @@ form.is-sent .form-fields{display:none;}
   padding:17px 22px;border-top:1px solid var(--line);
 }
 .price-row:nth-child(odd){background:rgba(244,239,227,.015);}
-.price-row .item{font-size:14.5px;color:var(--ink);}
-.price-row .item small{display:block;color:var(--ink-faint);font-size:12px;margin-top:3px;}
-.price-row .price{font-family:var(--f-mono);font-size:14.5px;color:var(--gold-bright);white-space:nowrap;}
+.price-row .item{font-size:16px;color:var(--ink);}
+.price-row .item small{display:block;color:var(--ink-faint);font-size:13px;margin-top:3px;}
+.price-row .price{font-family:var(--f-mono);font-size:16px;color:var(--gold-bright);white-space:nowrap;}
 .price-note{padding:14px 22px;font-size:12px;color:var(--ink-faint);background:var(--bg-1);border-top:1px solid var(--line);}
 
 /* =================================================================
@@ -628,11 +657,14 @@ form.is-sent .form-fields{display:none;}
 .contact-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line);}
 .contact-list .row{
   display:flex;justify-content:space-between;gap:16px;padding:20px 0;border-bottom:1px solid var(--line);
+  align-items:flex-start;
 }
 .contact-list .label{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding-top:3px;}
 .contact-list .val{font-size:16px;text-align:right;}
 .contact-list .val a:hover{color:var(--gold-bright);}
 .contact-list .val small{display:block;color:var(--ink-faint);font-size:12.5px;margin-top:4px;font-family:var(--f-mono);}
+.contact-list .val-list{display:flex;flex-direction:column;gap:16px;align-items:flex-end;}
+.contact-list .val-list .val{text-align:right;}
 
 .messenger-links{display:flex;gap:14px;margin-top:26px;flex-wrap:wrap;}
 .messenger-btn{
@@ -749,6 +781,14 @@ form.is-sent .form-fields{display:none;}
   object-fit:cover;display:block;
   transition:transform .65s cubic-bezier(.2,.7,.2,1);
 }
+.gallery-placeholder{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  background:linear-gradient(150deg, var(--bg-2), var(--bg-1));
+  color:var(--ink-faint);
+}
+.gallery-placeholder svg{width:36px;height:36px;color:var(--gold-dim);}
+.gallery-placeholder span{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;}
 .ob-slide.is-active .gallery-slide-inner img{transform:scale(1.03);}
 .gallery-caption{
   position:absolute;bottom:0;left:0;right:0;
@@ -840,9 +880,9 @@ form.is-sent .form-fields{display:none;}
 }
 
 /* =================================================================
-   ФОНОВОЕ ИЗОБРАЖЕНИЕ — back.jpg
+   ФОНОВОЕ ИЗОБРАЖЕНИЕ — реальная вывеска OIL BANK (storefront.jpg)
    Слои (снизу вверх):
-   1. back.jpg — приглушённый (opacity + blur)
+   1. storefront.jpg — приглушённый (opacity + blur), даёт тёплое золотое сияние
    2. тёмный градиент поверх (почти непрозрачный внизу, чуть светлее вверху)
    3. исходный grain/vignette body::before (уже есть в коде)
 ================================================================= */
@@ -851,12 +891,12 @@ body::after {
   position: fixed;
   inset: 0;
   z-index: -2;               /* ниже body::before */
-  background-image: url('../images/back.jpg');
+  background-image: url('../images/storefront.jpg');
   background-size: cover;
-  background-position: center top;
+  background-position: center 30%;
   background-attachment: fixed;
-  opacity: 0.18;             /* фон очень приглушён — почти незаметен, но даёт текстуру */
-  filter: blur(1px) saturate(0.6);
+  opacity: 0.13;             /* фон очень приглушён — тёплое сияние, а не картинка */
+  filter: blur(3px) saturate(0.7);
   pointer-events: none;
 }
 
@@ -866,7 +906,7 @@ body::before {
   background:
     radial-gradient(ellipse 900px 600px at 85% -10%, rgba(200,160,70,.12), transparent 60%),
     radial-gradient(ellipse 700px 500px at -10% 110%, rgba(200,160,70,.07), transparent 60%),
-    linear-gradient(180deg, rgba(10,10,11,.55) 0%, rgba(10,10,11,.80) 100%);
+    linear-gradient(180deg, rgba(10,10,11,.6) 0%, rgba(10,10,11,.85) 100%);
 }
 
 /* Для hero-секции — фон чуть проступает через менее тёмный оверлей */
@@ -874,12 +914,12 @@ body::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url('../images/back.jpg');
+  background-image: url('../images/storefront.jpg');
   background-size: cover;
-  background-position: center;
+  background-position: center 25%;
   background-attachment: fixed;
-  opacity: 0.10;
-  filter: blur(2px) saturate(0.5);
+  opacity: 0.09;
+  filter: blur(4px) saturate(0.6);
   z-index: 0;
   pointer-events: none;
 }
